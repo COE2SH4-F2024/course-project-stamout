@@ -23,7 +23,6 @@ class Player
         objPos getPlayerPos() const; // Upgrade this in iteration 3.       
         void updatePlayerDir();
         void movePlayer();
-        void speedControl();
 
         // More methods to be added here
 

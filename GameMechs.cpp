@@ -115,17 +115,15 @@ int GameMechs::getSpeed()
 // {
 //     speed--;
 // }
-int GameMechs::setSpeed(int this_speed)
+
+void GameMechs::setSpeed(int this_speed)
 {
     speed = this_speed;
 }
+
 int GameMechs::getDelayAmount()
 {
-    return delayAmount;
-}
-void GameMechs::setDelayAmount(int this_amount)
-{
-    delayAmount = this_amount;
+    return this->gameSpeedDelays[speed - 1]; // speed is one-indexed
 }
 
 void GameMechs::generateFood(objPos blockOff)

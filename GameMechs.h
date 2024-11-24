@@ -24,6 +24,8 @@ class GameMechs
 
         objPos food;
 
+        const int gameSpeedDelays[5] = {500000, 350000, 200000, 100000, 10000};
+
     public:
         GameMechs();
         GameMechs(int boardX, int boardY);
@@ -39,11 +41,10 @@ class GameMechs
         void clearInput();
 
         int getSpeed();
-        int setSpeed(int this_speed);
+        void setSpeed(int this_speed);
         // void increaseSpeed();
         // void decreaseSpeed();
         int getDelayAmount();
-        void setDelayAmount(int this_amount);
 
         int getBoardSizeX() const;
         int getBoardSizeY() const;
