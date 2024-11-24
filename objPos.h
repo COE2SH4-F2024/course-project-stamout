@@ -11,14 +11,17 @@ typedef struct
 class objPos
 {
     public:
-        Pos* pos;        
+        Pos* pos;        //heap level position struct, instiate on the heap upon intialization , need deep copy applicable to copy constructpr and copy assignment operator and destructor  
         char symbol;
 
-        objPos();
-        objPos(int xPos, int yPos, char sym);
+        objPos();   //intializes x, y posiiton and symbol associated with the x, y position 
+        objPos(int xPos, int yPos, char sym);       //intializing object position with existing parameters 
         
         // Respect the rule of six / minimum four
         // [TODO] Implement the missing special member functions to meet the minimum four rule
+        objPos(const objPos &a); //Copy Constructor (2/4)
+        objPos& operator=(const objPos &a); //Copy assignment operator (3/4)
+        ~objPos(); // Destructor (4/4)
         
         void setObjPos(objPos o);        
         void setObjPos(int xPos, int yPos, char sym);  
@@ -31,3 +34,5 @@ class objPos
 };
 
 #endif
+
+

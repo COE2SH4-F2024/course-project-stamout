@@ -16,6 +16,8 @@ class GameMechs
         bool exitFlag;
         bool loseFlag;
         int score;
+        int speed;
+        int delayAmount;
 
         int boardSizeX;
         int boardSizeY;
@@ -32,9 +34,16 @@ class GameMechs
         bool getLoseFlagStatus() const;
         void setLoseFlag();
 
-        char getInput() const;
+        char getInput();
         void setInput(char this_input);
         void clearInput();
+
+        int getSpeed();
+        int setSpeed(int this_speed);
+        // void increaseSpeed();
+        // void decreaseSpeed();
+        int getDelayAmount();
+        void setDelayAmount(int this_amount);
 
         int getBoardSizeX() const;
         int getBoardSizeY() const;
@@ -43,6 +52,10 @@ class GameMechs
         void incrementScore();
         
         // More methods should be added here
+        void collectAsyncInput();
+
+        void generateFood(objPos blockOff);
+        objPos getFoodPos() const;
 };
 
-#endif
+#endif 
