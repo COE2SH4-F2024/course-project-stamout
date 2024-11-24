@@ -17,17 +17,13 @@ GameMechs::GameMechs()
     //intialize the food object outside the gameboard
 }
 
-GameMechs::GameMechs(int boardX, int boardY)
+// Use constructor delegating to reduce code repetition here
+GameMechs::GameMechs(int boardX, int boardY) : GameMechs()
 {
-    input = 0;
-    exitFlag = false;
-    loseFlag = false;
-    score = 0;
-    speed = 1;
-    delayAmount = 500000; // New Frame every 0.5 sec
-
     boardSizeX = boardX;
     boardSizeY = boardY;
+
+    // Do we need to adjust the food pos here as well?
 }
 
 // do you need a destructor?
@@ -44,7 +40,7 @@ bool GameMechs::getExitFlagStatus() const
 
 bool GameMechs::getLoseFlagStatus() const
 {
-    return loseFlag; //
+    return loseFlag;
 }
     
 void GameMechs::collectAsyncInput()
