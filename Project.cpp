@@ -4,6 +4,7 @@
 
 #include "Player.h"
 #include "GameMechs.h"
+#include "Food.h"
 
 using namespace std;
 
@@ -11,6 +12,7 @@ using namespace std;
 
 Player *myPlayer; //Global pointer meant to instantiate a player object on the heap. 
 GameMechs *myGM;
+Food *food;
 
 void Initialize(void);
 void GetInput(void);
@@ -46,6 +48,9 @@ void Initialize(void)
 
     myGM = new GameMechs();
     myPlayer = new Player(myGM);
+    food = new Food();
+
+    food->generateFood(myPlayer->getPlayerPos(), myGM->getBoardSizeX(), myGM->getBoardSizeY());
 }
 
 void GetInput(void)
@@ -57,7 +62,6 @@ void RunLogic(void)
 {
     myPlayer->updatePlayerDir();
     myPlayer->movePlayer();
-    //myPlayer->speedControl();
 }
 
 void DrawScreen(void)
@@ -65,7 +69,7 @@ void DrawScreen(void)
     MacUILib_clearScreen();   
 
     objPos playerPos = myPlayer -> getPlayerPos();
-    objPos foodPos = myGM->getFoodPos();
+    objPos foodPos = food->getFoodPos();
 
     int boardX = myGM->getBoardSizeX();
     int boardY = myGM->getBoardSizeY();
@@ -84,7 +88,7 @@ void DrawScreen(void)
             {
                 MacUILib_printf("%c", playerPos.symbol);
             }     
-            else if (i == foodPos.pos->y && j ==foodPos.pos->x )
+            else if (i == foodPos.pos->y && j == foodPos.pos->x )
             {
                 MacUILib_printf("%c", foodPos.symbol);
             }    
@@ -123,6 +127,7 @@ void CleanUp(void)
 
     delete myPlayer;
     delete myGM;
+    delete food;
 
     MacUILib_uninit();
 }

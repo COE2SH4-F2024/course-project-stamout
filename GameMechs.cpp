@@ -12,9 +12,6 @@ GameMechs::GameMechs()
 
     boardSizeX = 29;
     boardSizeY = 14;
-
-    food.setObjPos(10,10,'o');
-    //intialize the food object outside the gameboard
 }
 
 // Use constructor delegating to reduce code repetition here
@@ -22,8 +19,6 @@ GameMechs::GameMechs(int boardX, int boardY) : GameMechs()
 {
     boardSizeX = boardX;
     boardSizeY = boardY;
-
-    // Do we need to adjust the food pos here as well?
 }
 
 // do you need a destructor?
@@ -103,7 +98,7 @@ void GameMechs::clearInput()
 }
 
 // More methods should be added here
-int GameMechs::getSpeed()
+int GameMechs::getSpeed() const
 {
     return speed;
 }
@@ -121,18 +116,7 @@ void GameMechs::setSpeed(int this_speed)
     speed = this_speed;
 }
 
-int GameMechs::getDelayAmount()
+int GameMechs::getDelayAmount() const
 {
     return this->gameSpeedDelays[speed - 1]; // speed is one-indexed
-}
-
-void GameMechs::generateFood(objPos blockOff)
-{
-    //You only need to block off the player position for now
-    //Easier for now,upgrade this in t=iteration 3.
-}
-
-objPos GameMechs::getFoodPos() const
-{
-    return food;
 }
