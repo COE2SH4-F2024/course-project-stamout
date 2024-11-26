@@ -47,10 +47,10 @@ void Initialize(void)
     MacUILib_clearScreen();
 
     myGM = new GameMechs();
-    myPlayer = new Player(myGM);
-    food = new Food();
-
-    food->generateFood(myPlayer->getPlayerPos()->getHeadElement(), myGM->getBoardSizeX(), myGM->getBoardSizeY());
+    food = new Food(myGM->getBoardSizeX(), myGM->getBoardSizeY());
+    
+    myPlayer = new Player(myGM, food);
+    food->generateFood(*myPlayer->getPlayerPos());
 }
 
 void GetInput(void)
@@ -112,6 +112,7 @@ void DrawScreen(void)
    } 
     MacUILib_printf("\n");
     MacUILib_printf("\nCurrent Game Speed: %dx\n", myGM->getSpeed());
+    MacUILib_printf("\nScore: %d\n", myGM->getScore());
     MacUILib_printf("\n=============================================================\n");
     MacUILib_printf("Game Speed Adjustment Instructions:\n");
     MacUILib_printf("-------------------------------------------------------------\n");

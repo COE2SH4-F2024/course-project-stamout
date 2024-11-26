@@ -58,12 +58,12 @@ char GameMechs::getInput()
 
 int GameMechs::getScore() const
 {
-    //return score; //
+    return score;
 }
 
 void GameMechs::incrementScore()
 {
-    //score++; //
+    score++;
 }
 
 int GameMechs::getBoardSizeX() const

@@ -2,9 +2,10 @@
 #include "MacUILib.h"
 
 
-Player::Player(GameMechs* thisGMRef)
+Player::Player(GameMechs* thisGMRef, Food* thisFood)
 {
     mainGameMechsRef = thisGMRef;
+    food = thisFood;
     state = STOP;
 
     // more actions to be included
@@ -135,8 +136,15 @@ void Player::movePlayer()
 
     }
 
+    objPos foodPos = food->getFoodPos();
+
     playerPosList->insertHead(head);
-    playerPosList->removeTail();
+    if (head.pos->x == foodPos.pos->x && head.pos->y == foodPos.pos->y) {
+        food->generateFood(*playerPosList);
+        mainGameMechsRef->incrementScore();
+    } else {
+        playerPosList->removeTail();
+    }
 }
 
 // More methods to be added
