@@ -11,5 +11,5 @@ Team Information
 Member 1 MacID: stamout
 Member 1 StudentID: 400502970
 
-Member 2 MacID: [Insert your macID here]
-Member 2 StudentID: [Insert your numerical student ID here]
+Member 2 MacID: [shaikh22]
+Member 2 StudentID: [400521659]
