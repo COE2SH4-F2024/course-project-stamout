@@ -50,12 +50,12 @@ void Initialize(void)
     myPlayer = new Player(myGM);
     food = new Food();
 
-    food->generateFood(myPlayer->getPlayerPos(), myGM->getBoardSizeX(), myGM->getBoardSizeY());
+    food->generateFood(myPlayer->getPlayerPos()->getHeadElement(), myGM->getBoardSizeX(), myGM->getBoardSizeY());
 }
 
 void GetInput(void)
 {
-   myGM->collectAsyncInput();
+    myGM->collectAsyncInput();
 }
 
 void RunLogic(void)
@@ -68,7 +68,7 @@ void DrawScreen(void)
 {
     MacUILib_clearScreen();   
 
-    objPos playerPos = myPlayer -> getPlayerPos();
+    objPos playerPos = myPlayer->getPlayerPos()->getHeadElement();
     objPos foodPos = food->getFoodPos();
 
     int boardX = myGM->getBoardSizeX();
