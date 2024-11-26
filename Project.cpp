@@ -31,7 +31,7 @@ int main(void)
     while(myGM->getExitFlagStatus() == false)  
     {
         GetInput();
-        RunLogic();
+        RunLogic(); 
         DrawScreen();
         LoopDelay();
     }

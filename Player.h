@@ -25,6 +25,7 @@ class Player
         void updatePlayerDir();
         void movePlayer();
 
+
         // More methods to be added here
 
     private:
@@ -34,6 +35,8 @@ class Player
 
         // Need a reference to the Main Game Mechanisms
         GameMechs* mainGameMechsRef;
+
+        bool checkSelfCollision();
 };
 
 #endif

@@ -137,14 +137,36 @@ void Player::movePlayer()
     }
 
     objPos foodPos = food->getFoodPos();
-
     playerPosList->insertHead(head);
-    if (head.pos->x == foodPos.pos->x && head.pos->y == foodPos.pos->y) {
+
+    // Must check self collision AFTER we've added the new head
+    if (checkSelfCollision()) {
+        mainGameMechsRef->setExitTrue();
+    }
+
+    if (head.isPosEqual(&foodPos)) {
         food->generateFood(*playerPosList);
         mainGameMechsRef->incrementScore();
     } else {
         playerPosList->removeTail();
     }
+}
+
+bool Player::checkSelfCollision()
+{
+    if (state != STOP) {
+        objPos head = playerPosList->getHeadElement();
+        
+        for (int i = 1; i < playerPosList->getSize(); i++) {
+            objPos currentPos = playerPosList->getElement(i);
+            if (head.isPosEqual(&currentPos)) {
+                // This won't exit the program immediately, keep this in mind
+                return true;
+            }
+        }
+    }
+
+    return false;
 }
 
 // More methods to be added
