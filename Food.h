@@ -4,6 +4,8 @@
 #include "objPos.h"
 #include "objPosArrayList.h"
 
+#define SPECIAL_FOOD_CHARACTER '?'
+
 class Food
 {
     public:
@@ -11,10 +13,12 @@ class Food
         ~Food();
 
         void generateFood(objPosArrayList& blockOff);
-        objPos getFoodPos() const;
+        objPosArrayList* getFoodPos() const;
 
     private:
-        objPos foodPos;
+        objPosArrayList* foodBucket;
+
+        int numFood;
         int xMax;
         int yMax;
 };

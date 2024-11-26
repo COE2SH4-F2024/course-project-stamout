@@ -136,7 +136,7 @@ void Player::movePlayer()
 
     }
 
-    objPos foodPos = food->getFoodPos();
+    objPosArrayList* foodPosList = food->getFoodPos();
     playerPosList->insertHead(head);
 
     // Must check self collision AFTER we've added the new head
@@ -144,10 +144,25 @@ void Player::movePlayer()
         mainGameMechsRef->setExitTrue();
     }
 
-    if (head.isPosEqual(&foodPos)) {
-        food->generateFood(*playerPosList);
-        mainGameMechsRef->incrementScore();
-    } else {
+    int found = 0;
+    for (int i = 0; i < foodPosList->getSize(); i++) {
+        objPos currentPos = foodPosList->getElement(i);
+
+        if (head.isPosEqual(&currentPos)) {
+            // Increase by 10 when we hit a special food
+            if (currentPos.symbol == SPECIAL_FOOD_CHARACTER) {
+                mainGameMechsRef->increaseScore(10);
+            } else {
+                mainGameMechsRef->incrementScore();
+            }
+
+            food->generateFood(*playerPosList);
+            found = 1;
+            break;
+        }
+    }
+
+    if (!found) {
         playerPosList->removeTail();
     }
 }

@@ -23,11 +23,10 @@ int objPosArrayList::getSize() const
 
 void objPosArrayList::insertHead(objPos thisPos)
 {
-    // if(listSize == arrayCapacity)
-    // {
-    //     cout << "Array is Full!" << endl;
-    //     return;
-    // }
+    if(listSize == arrayCapacity)
+    {
+         return;
+    }
 
     // Shifting/Pushing all elements back by one slot
     // Overwriting the value in i+1 position with that in i position
@@ -43,11 +42,10 @@ void objPosArrayList::insertHead(objPos thisPos)
 
 void objPosArrayList::insertTail(objPos thisPos)
 {
-    // if(listSize == arrayCapacity)
-    // {
-    //     cout << "Array is Full!" << endl;
-    //     return;
-    // }
+    if(listSize == arrayCapacity)
+    {
+         return;
+    }
     
     aList[listSize] = thisPos;  // Inserting the element at the tail, index: sizeList
     listSize++;     // Increase the size of the List by one
@@ -56,11 +54,10 @@ void objPosArrayList::insertTail(objPos thisPos)
 
 void objPosArrayList::removeHead()
 {
-    // if(listSize == 0)
-    // {
-    //     cout << "List is Empty, No Removal Allowed!" << endl;
-    //     return;
-    // }
+    if(listSize == 0)
+    {
+         return;
+    }
 
     for(int i=0; i<listSize-1; i++)
     {
@@ -71,11 +68,10 @@ void objPosArrayList::removeHead()
 
 void objPosArrayList::removeTail()
 {
-    // if(listSize == 0)
-    // {
-    //     cout << "List is Empty, No Removal Allowed!" << endl;
-    //     return;
-    // }
+    if(listSize == 0)
+    {
+         return;
+    }
 
     listSize--;
 }
@@ -95,7 +91,7 @@ objPos objPosArrayList::getElement(int index) const
     // if(index<0 || index >= listSize)
     // {
     //     cout << "You have supplied an invalid index." << endl;
-    //     return;
+    //     return objPos();
     // }
 
     return aList[index];

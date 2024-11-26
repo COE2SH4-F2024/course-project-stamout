@@ -6,36 +6,59 @@ Food::Food(int boardXMax, int boardYMax)
 {
     xMax = boardXMax;
     yMax = boardYMax;
+    numFood = 5;
+
+    foodBucket = new objPosArrayList();
 }
 
 Food::~Food()
 {
+    delete foodBucket;
 }
 
 void Food::generateFood(objPosArrayList& blockOff)
 {
     srand(time(NULL));
-    objPos newPos(1 + rand() % (xMax - 1), 1 + rand() % (yMax - 1), 'o');
 
-    
+    for (int i = 0; i < numFood; i++) {
+        foodBucket->removeTail();
+    }
 
-    while (true) {
-        newPos = objPos(1 + rand() % (xMax - 1), 1 + rand() % (yMax - 1), 'o');
+    for (int i = 0; i < numFood; i++) {
+        char symbol = 'o';
+        if (i == numFood - 1) {
+            symbol = SPECIAL_FOOD_CHARACTER;
+        }
 
-        for (int i = 0; i < blockOff.getSize(); i++) {
-            objPos currentPos = blockOff.getElement(i);
-            if (newPos.pos->x == currentPos.pos->x && newPos.pos->y == currentPos.pos->y) {
-                continue;
+        objPos newPos(1 + rand() % (xMax - 1), 1 + rand() % (yMax - 1), symbol);
+
+        while (true) {
+            newPos = objPos(1 + rand() % (xMax - 1), 1 + rand() % (yMax - 1), symbol);
+
+            // Check that we're not creating a food item on the snake
+            for (int i = 0; i < blockOff.getSize(); i++) {
+                objPos currentPos = blockOff.getElement(i);
+                if (newPos.isPosEqual(&currentPos)) {
+                    continue;
+                }
             }
+
+            // Check that we're not creating a food item on another food item
+            for (int i = 0; i < foodBucket->getSize(); i++) {
+                objPos currentPos = foodBucket->getElement(i);
+                if (newPos.isPosEqual(&currentPos)) {
+                    continue;
+                }
+            }
+            
+            break;
         }
         
-        break;
+        foodBucket->insertHead(newPos);
     }
-    
-    foodPos = newPos;
 }
 
-objPos Food::getFoodPos() const
+objPosArrayList* Food::getFoodPos() const
 {
-    return foodPos;
+    return foodBucket;
 }
