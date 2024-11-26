@@ -68,33 +68,44 @@ void DrawScreen(void)
 {
     MacUILib_clearScreen();   
 
-    objPos playerPos = myPlayer->getPlayerPos()->getHeadElement();
+    objPosArrayList* playerPosList = myPlayer->getPlayerPos();
+    objPos playerHead = playerPosList->getHeadElement();
     objPos foodPos = food->getFoodPos();
 
     int boardX = myGM->getBoardSizeX();
     int boardY = myGM->getBoardSizeY();
 
-    MacUILib_printf("Player [x , y, sym] = [%d, %d, %c]\n", playerPos.pos->x, playerPos.pos->y, playerPos.symbol);
-    
+    MacUILib_printf("Player [x , y, sym] = [%d, %d, %c]\n", playerHead.pos->x, playerHead.pos->y, playerHead.symbol);
+
    for(int i = 0; i <= boardY; i++) //y-direction
    {
         for(int j = 0; j <= boardX; j++) //x direction
         {
-            if(i == 0 || j == 0 || i == boardY || j == boardX)
+            int found = 0;
+            for (int k = 0; k < playerPosList->getSize(); k++) {
+                objPos currentPos = playerPosList->getElement(k);
+                if (i == currentPos.pos->y && j == currentPos.pos->x) {
+                    MacUILib_printf("%c", currentPos.symbol);
+                    found = 1;
+                    break;
+                }
+            }
+
+            // temporary solution
+            if (found == 1) {
+                continue;
+            }
+            else if(i == 0 || j == 0 || i == boardY || j == boardX)
             {
                 MacUILib_printf("%c", '#');
-            }
-            else if (i == playerPos.pos->y && j == playerPos.pos->x )
-            {
-                MacUILib_printf("%c", playerPos.symbol);
-            }     
+            } 
             else if (i == foodPos.pos->y && j == foodPos.pos->x )
             {
                 MacUILib_printf("%c", foodPos.symbol);
             }    
             else
             {
-                 MacUILib_printf("%c", ' ');
+                MacUILib_printf("%c", ' ');
             }
         }
         MacUILib_printf("%c", '\n');
