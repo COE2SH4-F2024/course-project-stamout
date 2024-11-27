@@ -11,10 +11,10 @@ Player::Player(GameMechs* thisGMRef, Food* thisFood)
     // more actions to be included
     playerPosList = new objPosArrayList();
 
-    objPos playerPos;
-    playerPos.pos->x = mainGameMechsRef->getBoardSizeX() / 2;
-    playerPos.pos->y = mainGameMechsRef->getBoardSizeY() / 2;
-    playerPos.symbol = '@';
+    objPos playerPos(thisGMRef->getBoardSizeX() / 2, thisGMRef->getBoardSizeY() / 2, '@');
+    // playerPos.pos->x = ;
+    // playerPos.pos->y = mainGameMechsRef->getBoardSizeY() / 2;
+    // playerPos.symbol = , '@';
 
     playerPosList->insertHead(playerPos);
 }
@@ -30,7 +30,7 @@ Player::~Player()
 
 objPosArrayList* Player::getPlayerPos() const
 {
-    // return the reference to the playerPos arrray list
+    // return the reference to the playerPos objPos arrray list
     return playerPosList;
 }
 

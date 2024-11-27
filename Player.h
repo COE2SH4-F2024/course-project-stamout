@@ -27,6 +27,7 @@ class Player
 
 
         // More methods to be added here
+        bool checkSelfCollision();
 
     private:
         objPosArrayList* playerPosList;     
@@ -36,7 +37,6 @@ class Player
         // Need a reference to the Main Game Mechanisms
         GameMechs* mainGameMechsRef;
 
-        bool checkSelfCollision();
 };
 
 #endif

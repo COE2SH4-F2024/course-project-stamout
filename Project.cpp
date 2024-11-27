@@ -71,6 +71,7 @@ void DrawScreen(void)
     objPosArrayList* playerPosList = myPlayer->getPlayerPos();
     objPos playerHead = playerPosList->getHeadElement();
 
+    //objPos foodPos = myGM->getFoodPos();
     int boardX = myGM->getBoardSizeX();
     int boardY = myGM->getBoardSizeY();
 
@@ -102,7 +103,6 @@ void DrawScreen(void)
             if (found) {
                 continue;
             }
-
             // Border
             else if(i == 0 || j == 0 || i == boardY || j == boardX)
             {
@@ -118,6 +118,16 @@ void DrawScreen(void)
     MacUILib_printf("\n");
     MacUILib_printf("\nCurrent Game Speed: %dx\n", myGM->getSpeed());
     MacUILib_printf("\nScore: %d\n", myGM->getScore());
+
+    if(myPlayer->checkSelfCollision() == true)
+    {
+        MacUILib_printf("Game over: You lose\n");
+    }
+    if(myGM->getExitFlagStatus() == true && myPlayer->checkSelfCollision() == false)
+    {
+        MacUILib_printf("Game ended\n");
+    }
+
     MacUILib_printf("\n=============================================================\n");
     MacUILib_printf("Game Speed Adjustment Instructions:\n");
     MacUILib_printf("-------------------------------------------------------------\n");
@@ -140,7 +150,7 @@ void LoopDelay(void)
 
 void CleanUp(void)
 {
-    MacUILib_clearScreen();    
+      
 
     delete myPlayer;
     delete myGM;
