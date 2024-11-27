@@ -36,19 +36,31 @@ void Food::generateFood(objPosArrayList& blockOff)
             newPos = objPos(1 + rand() % (xMax - 1), 1 + rand() % (yMax - 1), symbol);
 
             // Check that we're not creating a food item on the snake
+            int found = 0;
+
             for (int i = 0; i < blockOff.getSize(); i++) {
                 objPos currentPos = blockOff.getElement(i);
                 if (newPos.isPosEqual(&currentPos)) {
-                    continue;
+                    found = 1;
+                    break;
                 }
+            }
+
+            if (found) {
+                continue;
             }
 
             // Check that we're not creating a food item on another food item
             for (int i = 0; i < foodBucket->getSize(); i++) {
                 objPos currentPos = foodBucket->getElement(i);
                 if (newPos.isPosEqual(&currentPos)) {
-                    continue;
+                    found = 1;
+                    break;
                 }
+            }
+
+            if (found) {
+                continue;
             }
             
             break;
