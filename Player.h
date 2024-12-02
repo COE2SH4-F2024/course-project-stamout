@@ -4,7 +4,7 @@
 #include "GameMechs.h"
 #include "objPos.h"
 #include "objPosArrayList.h"
-#include "food.h"
+#include "Food.h"
 
 class Player
 {
@@ -37,7 +37,6 @@ class Player
         GameMechs* mainGameMechsRef;
 
         bool checkSelfCollision();
-
 };
 
 #endif
