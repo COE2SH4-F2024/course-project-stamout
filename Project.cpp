@@ -134,10 +134,10 @@ void DrawScreen(void)
     MacUILib_printf("Game Speed Adjustment Instructions:\n");
     MacUILib_printf("-------------------------------------------------------------\n");
     MacUILib_printf("Enter '1' to 1x your Normal Game Speed (0.50 seconds delay).\n");
-    MacUILib_printf("Enter '2' to 2x your Normal Game Speed (0.25 seconds delay).\n");
-    MacUILib_printf("Enter '3' to 3x your Normal Game Speed (0.13 seconds delay).\n");
-    MacUILib_printf("Enter '4' to 4x your Normal Game Speed (0.06 seconds delay).\n");
-    MacUILib_printf("Enter '5' to 5x your Normal Game Speed (0.03 seconds delay).");
+    MacUILib_printf("Enter '2' to 2x your Normal Game Speed (0.35 seconds delay).\n");
+    MacUILib_printf("Enter '3' to 3x your Normal Game Speed (0.20 seconds delay).\n");
+    MacUILib_printf("Enter '4' to 4x your Normal Game Speed (0.10 seconds delay).\n");
+    MacUILib_printf("Enter '5' to 5x your Normal Game Speed (0.01 seconds delay).");
     MacUILib_printf("\n=============================================================\n");
 }
 
