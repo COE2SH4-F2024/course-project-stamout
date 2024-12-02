@@ -146,7 +146,7 @@ void Player::movePlayer()
         mainGameMechsRef->setExitTrue();
     }
 
-    int found = 0;
+    bool found = false;
     for (int i = 0; i < foodPosList->getSize(); i++) {
         objPos currentPos = foodPosList->getElement(i);
 
@@ -159,7 +159,7 @@ void Player::movePlayer()
             }
 
             food->generateFood(*playerPosList);
-            found = 1;
+            found = true;
             break;
         }
     }
