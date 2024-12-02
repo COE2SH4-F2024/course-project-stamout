@@ -28,7 +28,7 @@ int main(void)
 
     Initialize();
 
-    while(myGM->getExitFlagStatus() == false)  
+    while (myGM->getExitFlagStatus() == false)  
     {
         GetInput();
         RunLogic(); 
@@ -119,13 +119,15 @@ void DrawScreen(void)
     MacUILib_printf("\nCurrent Game Speed: %dx\n", myGM->getSpeed());
     MacUILib_printf("\nScore: %d\n", myGM->getScore());
 
-    if(myPlayer->checkSelfCollision() == true)
+    // Lose flag is set if the snake self-collides (meaning a game loss state),
+    // exit flag is set if the player exits the game (esc button)
+    if (myGM->getExitFlagStatus())
     {
-        MacUILib_printf("Game over: You lose\n");
-    }
-    if(myGM->getExitFlagStatus() == true && myPlayer->checkSelfCollision() == false)
-    {
-        MacUILib_printf("Game ended\n");
+        if (myGM->getLoseFlagStatus()) {
+            MacUILib_printf("Game over: You lose\n");
+        } else {
+            MacUILib_printf("Game ended\n");
+        }
     }
 
     MacUILib_printf("\n=============================================================\n");
@@ -137,21 +139,16 @@ void DrawScreen(void)
     MacUILib_printf("Enter '4' to 4x your Normal Game Speed (0.06 seconds delay).\n");
     MacUILib_printf("Enter '5' to 5x your Normal Game Speed (0.03 seconds delay).");
     MacUILib_printf("\n=============================================================\n");
-    // MacUILib_printf("\nCurrent Game Speed: %d seconds\n", );
-    // MacUILib_printf("Press = to increase the Game speed (up to 0.1 seconds)");
-    // MacUILib_printf("Press - to decrease the Game Speed (down to 0.5 seconds)\n");
 }
 
 void LoopDelay(void)
 {
-    MacUILib_Delay(myGM->getDelayAmount()); // 0.1s delay
+    MacUILib_Delay(myGM->getDelayAmount());
 }
 
 
 void CleanUp(void)
 {
-      
-
     delete myPlayer;
     delete myGM;
     delete food;

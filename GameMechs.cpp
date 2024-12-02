@@ -14,14 +14,15 @@ GameMechs::GameMechs()
     boardSizeY = 14;
 }
 
-// Use constructor delegating to reduce code repetition here
+// Use constructor delegation to reduce code repetition here
+// If unfamiliar, constructor delegation (the ": GameMechs()" syntax) makes
+// a call to the other GameMechs() constructor before executing any other code.
 GameMechs::GameMechs(int boardX, int boardY) : GameMechs()
 {
     boardSizeX = boardX;
     boardSizeY = boardY;
 }
 
-// do you need a destructor?
 GameMechs::~GameMechs()
 {
     //Nothing on the heap
@@ -81,7 +82,6 @@ int GameMechs::getBoardSizeY() const
     return boardSizeY;
 }
 
-
 void GameMechs::setExitTrue()
 {
     exitFlag = true;
@@ -89,12 +89,12 @@ void GameMechs::setExitTrue()
 
 void GameMechs::setLoseFlag()
 {
-    
+    loseFlag = true;
 }
 
 void GameMechs::setInput(char this_input)
 {
-
+    input = this_input;
 }
 
 void GameMechs::clearInput()
@@ -107,14 +107,6 @@ int GameMechs::getSpeed() const
 {
     return speed;
 }
-// void GameMechs::increaseSpeed()
-// {
-//     speed++;
-// }
-// void GameMechs::decreaseSpeed()
-// {
-//     speed--;
-// }
 
 void GameMechs::setSpeed(int this_speed)
 {
@@ -123,5 +115,7 @@ void GameMechs::setSpeed(int this_speed)
 
 int GameMechs::getDelayAmount() const
 {
-    return this->gameSpeedDelays[speed - 1]; // speed is one-indexed
+    // Get the corresponding delay for our current speed
+    // Keep in mind speed is one-indexed, i.e. it starts at 1 rather than 0.
+    return this->gameSpeedDelays[speed - 1];
 }

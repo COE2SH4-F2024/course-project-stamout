@@ -37,7 +37,6 @@ objPosArrayList* Player::getPlayerPos() const
 void Player::updatePlayerDir()
 {
     char input = mainGameMechsRef->getInput();
-    //mainGameMechsRef->clearInput();
 
     
         // PPA3 input processing logic 
@@ -141,6 +140,9 @@ void Player::movePlayer()
 
     // Must check self collision AFTER we've added the new head
     if (checkSelfCollision()) {
+        // If we self collide, we want to both exit the game, and be in a lose game state
+        // So we set both flags.
+        mainGameMechsRef->setLoseFlag();
         mainGameMechsRef->setExitTrue();
     }
 
