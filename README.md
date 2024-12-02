@@ -5,7 +5,9 @@ Course Project
 You must watch the briefing video and read through the manual to engage in the development activities.
 
 
-Section: [Insert your lab section]
+Section: 
+Student 1 Lab: L10
+Student 2 Lab: L01
 
 Team Information
 Member 1 MacID: stamout
