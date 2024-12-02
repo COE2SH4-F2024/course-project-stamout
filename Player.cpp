@@ -144,6 +144,10 @@ void Player::movePlayer()
         // So we set both flags.
         mainGameMechsRef->setLoseFlag();
         mainGameMechsRef->setExitTrue();
+
+        // This will technically cause the snake to increase in length, since we won't get to remove
+        // the tail, but the new head will be on top of itself. So the user won't be able to tell.
+        return;
     }
 
     bool found = false;
