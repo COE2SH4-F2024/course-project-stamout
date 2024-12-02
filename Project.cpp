@@ -81,12 +81,12 @@ void DrawScreen(void)
    {
         for(int j = 0; j <= boardX; j++) //x direction
         {
-            bool found = false;
+            int found = 0;
             for (int k = 0; k < playerPosList->getSize(); k++) {
                 objPos currentPos = playerPosList->getElement(k);
                 if (i == currentPos.pos->y && j == currentPos.pos->x) {
                     MacUILib_printf("%c", currentPos.symbol);
-                    found = true;
+                    found = 1;
                     break;
                 }
             }
@@ -95,7 +95,7 @@ void DrawScreen(void)
                 objPos currentPos = food->getFoodPos()->getElement(k);
                 if (i == currentPos.pos->y && j == currentPos.pos->x) {
                     MacUILib_printf("%c", currentPos.symbol);
-                    found = true;
+                    found = 1;
                     break;
                 }
             }
