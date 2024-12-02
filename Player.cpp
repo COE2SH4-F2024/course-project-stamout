@@ -8,13 +8,9 @@ Player::Player(GameMechs* thisGMRef, Food* thisFood)
     food = thisFood;
     state = STOP;
 
-    // more actions to be included
     playerPosList = new objPosArrayList();
 
     objPos playerPos(thisGMRef->getBoardSizeX() / 2, thisGMRef->getBoardSizeY() / 2, '@');
-    // playerPos.pos->x = ;
-    // playerPos.pos->y = mainGameMechsRef->getBoardSizeY() / 2;
-    // playerPos.symbol = , '@';
 
     playerPosList->insertHead(playerPos);
 }
@@ -22,9 +18,7 @@ Player::Player(GameMechs* thisGMRef, Food* thisFood)
 
 Player::~Player()
 {
-    // delete any heap members here
-    //no keyword "new" in the constructor 
-    //leave the destrcutor empty for now 
+    // delete any heap members here 
     delete playerPosList;
 }
 
@@ -39,8 +33,7 @@ void Player::updatePlayerDir()
     char input = mainGameMechsRef->getInput();
 
     
-        // PPA3 input processing logic 
-
+    // PPA3 input processing logic 
     switch(input)
     {       
         case 'W':              
@@ -76,21 +69,12 @@ void Player::updatePlayerDir()
         case '3':
         case '4':
         case '5':
-            // Nice trick, but can be a little unclear
+            // This essentially converts the ASCII character input to a number 1-5 by subtracting
+            // the zero character. For example, if we take input = '5', this is equivalent to
+            // input = 53. So when we subtract it by zero, we are really subtracting it by 48 ('0' == 48).
+            // So '5' - '0' = 53 - 48 = 5
             mainGameMechsRef->setSpeed(input - '0');
-            break;            
-        // case '=':
-        //     if(mainGameMechsRef->getSpeed() >= 1 && mainGameMechsRef->getSpeed() < 5)
-        //     {
-        //         mainGameMechsRef->increaseSpeed();
-        //     }
-        //     break;
-        // case '-':
-        //     if(mainGameMechsRef->getSpeed() > 1 && mainGameMechsRef->getSpeed() <= 5)
-        //     {
-        //         mainGameMechsRef->decreaseSpeed();
-        //     }
-        //     break;
+            break;
     }        
 }
 
@@ -155,7 +139,7 @@ void Player::movePlayer()
         objPos currentPos = foodPosList->getElement(i);
 
         if (head.isPosEqual(&currentPos)) {
-            // Increase by 10 when we hit a special food
+            // Increase score by 10 when we hit a special food
             if (currentPos.symbol == SPECIAL_FOOD_CHARACTER) {
                 mainGameMechsRef->increaseScore(10);
             } else {
@@ -175,15 +159,19 @@ void Player::movePlayer()
 
 bool Player::checkSelfCollision()
 {
-    if (state != STOP) {
-        objPos head = playerPosList->getHeadElement();
-        
-        for (int i = 1; i < playerPosList->getSize(); i++) {
-            objPos currentPos = playerPosList->getElement(i);
-            if (head.isPosEqual(&currentPos)) {
-                // This won't exit the program immediately, keep this in mind
-                return true;
-            }
+    // We don't change position in the stopped state, so we don't want to check our position since
+    // our new head will be at the same position.
+    if (state == STOP) {
+        return false;
+    }
+
+    objPos head = playerPosList->getHeadElement();
+    
+    // Compare all player positions (starting after the head) to the head
+    for (int i = 1; i < playerPosList->getSize(); i++) {
+        objPos currentPos = playerPosList->getElement(i);
+        if (head.isPosEqual(&currentPos)) {
+            return true;
         }
     }
 
