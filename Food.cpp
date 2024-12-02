@@ -20,20 +20,24 @@ void Food::generateFood(objPosArrayList& blockOff)
 {
     srand(time(NULL));
 
-    //Reomve all food objects from the gameboard everytime we want to generate new food positions after the snake collides with a food object. . 
+    //Reomve all food objects from the gameboard everytime we want to generate new food positions after the snake collides with a food object.  
     for (int i = 0; i < numFood; i++) {
         foodBucket->removeTail();
     }
-
-    //intialize every element of the string with the possible food objects. 
+ 
     for (int i = 0; i < numFood; i++) {
         char symbol = 'o';
+        //if i equals the last food item in the object position array, then make symbol the special chracter (?) which gives player 10 extra points when they collide to it. 
         if (i == numFood - 1) {
             symbol = SPECIAL_FOOD_CHARACTER;
         }
 
-        //Create an object for new position of the food at a random x & y coord and with the symbol,
-        objPos newPos(1 + rand() % (xMax - 1), 1 + rand() % (yMax - 1), symbol);
+        //Generate a random x and y position within the range excluding the border positions. 
+        int randX = 1 + rand() % (xMax - 1);
+        int randY = 1 + rand() % (yMax - 1);
+
+        //Create an object for new position of the food item at a random x & y coord and with the symbol. 
+        objPos newPos(randX, randY, symbol);
 
         while (true) {
             newPos = objPos(1 + rand() % (xMax - 1), 1 + rand() % (yMax - 1), symbol);
@@ -62,6 +66,7 @@ void Food::generateFood(objPosArrayList& blockOff)
                 }
             }
 
+            //if food item is created on the snake or food item, then run the while loop again to generate new x and y coord for food item.
             if (found) {
                 continue;
             }
@@ -73,6 +78,7 @@ void Food::generateFood(objPosArrayList& blockOff)
     }
 }
 
+//create an array object food items since we have multiple food items. 
 objPosArrayList* Food::getFoodPos() const
 {
     return foodBucket;

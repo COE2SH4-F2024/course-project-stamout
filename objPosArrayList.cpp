@@ -88,11 +88,5 @@ objPos objPosArrayList::getTailElement() const
 
 objPos objPosArrayList::getElement(int index) const
 {
-    // if(index<0 || index >= listSize)
-    // {
-    //     cout << "You have supplied an invalid index." << endl;
-    //     return objPos();
-    // }
-
     return aList[index];
 }

@@ -1,8 +1,8 @@
 #include "objPosArrayList.h"
-// #include <iostream>
-// using namespace std;
-// Check lecture contents on general purpose array list construction, 
-// and modify it to support objPos array list construction.
+
+// Paste your Tested implementation here.
+// Paste your Tested implementation here.
+// Paste your Tested implementation here.
 
 objPosArrayList::objPosArrayList()
 {
@@ -25,13 +25,12 @@ void objPosArrayList::insertHead(objPos thisPos)
 {
     if(listSize == arrayCapacity)
     {
-        //cout << "Array is Full!" << endl;
-        return;
+         return;
     }
 
     // Shifting/Pushing all elements back by one slot
     // Overwriting the value in i+1 position with that in i position
-    for(int i=listSize; i>0; i--)
+    for(int i = listSize; i > 0; i--)
     {
         aList[i] = aList[i-1]; // Shifting all elements towards the tail to create space at the head
     }
@@ -45,8 +44,7 @@ void objPosArrayList::insertTail(objPos thisPos)
 {
     if(listSize == arrayCapacity)
     {
-        //cout << "Array is Full!" << endl;
-        return;
+         return;
     }
     
     aList[listSize] = thisPos;  // Inserting the element at the tail, index: sizeList
@@ -58,8 +56,7 @@ void objPosArrayList::removeHead()
 {
     if(listSize == 0)
     {
-        //cout << "List is Empty, No Removal Allowed!" << endl;
-        return;
+         return;
     }
 
     for(int i=0; i<listSize-1; i++)
@@ -73,8 +70,7 @@ void objPosArrayList::removeTail()
 {
     if(listSize == 0)
     {
-        //cout << "List is Empty, No Removal Allowed!" << endl;
-        return;
+         return;
     }
 
     listSize--;
@@ -92,11 +88,5 @@ objPos objPosArrayList::getTailElement() const
 
 objPos objPosArrayList::getElement(int index) const
 {
-    // if(index<0 || index >= listSize)
-    // {
-    //     cout << "You have supplied an invalid index." << endl;
-    //     return;
-    // }
-
     return aList[index];
 }
