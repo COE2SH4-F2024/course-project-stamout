@@ -77,11 +77,13 @@ void DrawScreen(void)
 
     MacUILib_printf("Player [x , y, sym] = [%d, %d, %c]\n", playerHead.pos->x, playerHead.pos->y, playerHead.symbol);
 
-   for(int i = 0; i <= boardY; i++) //y-direction
-   {
+    for(int i = 0; i <= boardY; i++) //y-direction
+    {
         for(int j = 0; j <= boardX; j++) //x direction
         {
             bool found = false;
+
+            // Print the snake character if present at this (j,i) position
             for (int k = 0; k < playerPosList->getSize(); k++) {
                 objPos currentPos = playerPosList->getElement(k);
                 if (i == currentPos.pos->y && j == currentPos.pos->x) {
@@ -91,6 +93,9 @@ void DrawScreen(void)
                 }
             }
             
+            // Print a food character if present at this (j,i) position.
+            // We don't have to worry about checking if we already printed a snake character
+            // since we know food will never generate on top of the snake.
             for (int k = 0; k < food->getFoodPos()->getSize(); k++) {
                 objPos currentPos = food->getFoodPos()->getElement(k);
                 if (i == currentPos.pos->y && j == currentPos.pos->x) {
@@ -100,11 +105,13 @@ void DrawScreen(void)
                 }
             }
 
+            // If we printed either the snake or food character, continue and don't print anything else.
             if (found) {
                 continue;
             }
-            // Border
-            else if(i == 0 || j == 0 || i == boardY || j == boardX)
+
+            // Check if this is a border position
+            if (i == 0 || j == 0 || i == boardY || j == boardX)
             {
                 MacUILib_printf("%c", '#');
             } 
@@ -114,7 +121,8 @@ void DrawScreen(void)
             }
         }
         MacUILib_printf("%c", '\n');
-   } 
+    }
+     
     MacUILib_printf("\n");
     MacUILib_printf("\nCurrent Game Speed: %dx\n", myGM->getSpeed());
     MacUILib_printf("\nScore: %d\n", myGM->getScore());
