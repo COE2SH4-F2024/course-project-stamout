@@ -71,11 +71,8 @@ void DrawScreen(void)
     objPosArrayList* playerPosList = myPlayer->getPlayerPos();
     objPos playerHead = playerPosList->getHeadElement();
 
-    //objPos foodPos = myGM->getFoodPos();
     int boardX = myGM->getBoardSizeX();
     int boardY = myGM->getBoardSizeY();
-
-    MacUILib_printf("Player [x , y, sym] = [%d, %d, %c]\n", playerHead.pos->x, playerHead.pos->y, playerHead.symbol);
 
     for(int i = 0; i <= boardY; i++) //y-direction
     {
@@ -134,7 +131,7 @@ void DrawScreen(void)
         if (myGM->getLoseFlagStatus()) {
             MacUILib_printf("Game over: You lose\n");
         } else {
-            MacUILib_printf("Game ended\n");
+            MacUILib_printf("You ended the Game \n");
         }
     }
 
